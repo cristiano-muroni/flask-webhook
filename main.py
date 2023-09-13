@@ -14,7 +14,7 @@ def index():
 
 @app.route('/webhook', methods=['POST'])
 def webhook_post():
-    body = request.get_json()
+    body = request.args
     print(body) 
 
     if(body.object):
@@ -45,9 +45,9 @@ def webhook_get():
     # This will be the Verify Token value when you set up webhook 
     verify_token = os.getenv("VERIFY_TOKEN")
    # Parse params from the webhook verification request    
-    mode = request.json.get('hub.mode')
-    token = request.json.get('hub.token') 
-    challenge = request.json.get('hub.challenge') 
+    mode = request.args.get('hub.mode')
+    token = request.args.get('hub.token') 
+    challenge = request.args.get('hub.challenge') 
 
     # Check if a token and mode were sent
     if(mode & token):
